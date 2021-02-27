@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 
 # Don't change this name UNLESS you know what you are doing
+#NO Spaces allowed on either side of the '='
+
+#SERVER_NAME below MUST mach the DIRECTORY created on your droplet in the /var folder
 SERVER_NAME="my-server"
-DROPLET_URL="URL_TO_DROPLET"
+
+DROPLET_URL="138.68.100.110"
+# Change the root below to the non-root user you have setup:
+DROPLET_USER="root"
 
 
 echo "##############################"
@@ -19,4 +25,4 @@ echo "##############################"
 echo "Deploying The project..."
 echo "##############################"
 
-scp -r ./deploy/* root@$DROPLET_URL:/var/$SERVER_NAME
+scp -r ./deploy/* $DROPLET_USER@$DROPLET_URL:/var/$SERVER_NAME
