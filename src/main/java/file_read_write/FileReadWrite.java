@@ -14,10 +14,10 @@ public class FileReadWrite {
         dataOut.close();
         DataInputStream dataIn = new DataInputStream(new FileInputStream("file.bin"));
 
-//        System.out.println(dataIn.readUTF());
-//        System.out.println(dataIn.readInt());
-//        System.out.println(dataIn.readDouble());
-//        dataIn.close();
+       System.out.println(dataIn.readUTF());
+       System.out.println(dataIn.readInt());
+        System.out.println(dataIn.readDouble());
+        dataIn.close();
     }
 
     public static void writerStreamTester() throws IOException {
@@ -36,7 +36,7 @@ public class FileReadWrite {
 
     public static void main(String[] args) throws IOException {
         //outputStreamTester();
-        //writerStreamTester();
+        writerStreamTester();
 
     }
 
