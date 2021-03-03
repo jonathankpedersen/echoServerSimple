@@ -1,19 +1,20 @@
 package classdemo1;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 class ClientHandler extends Thread{
     Socket client;
     BufferedReader br;
     PrintWriter pw;
     String  name;
+
+
 
     public ClientHandler(Socket client) {
         this.client = client;
@@ -39,17 +40,44 @@ class ClientHandler extends Thread{
         pw.printf("Hej %s, Vi vil gerne quizze",name);
         pw.printf("Indtast val\n");
         String valg = br.readLine();
+        //TO do: break "UPPER#Hello World" into token UPPER and content Hello World
+        String[] kurt = valg.split("#");
         while(!valg.equalsIgnoreCase("bye")) {
-            switch (valg) {
+            switch (kurt[0]) {
                 case "GEO": geoHandler();break;
                 case "LIT": litHandler();break;
                 case "ADD": pw.println(valg + "ADD");break;
+                case "UPPER": pw.println(kurt[1].toUpperCase());break;
+                case "LOWER": pw.println(kurt[1].toLowerCase());break;
+                case "TRANSLATE": translate(kurt[1]);break;
+                case "Reverse": reverse(kurt[1]); break;
+                case "CLOSE":  ;break;
                 default: pw.println("prøv igen");
             }
             pw.println("Well done. Whats next?");
             valg = br.readLine();
         }
     }
+    private void translate(String string){
+         Map<String,String> translated = new HashMap<String,String>();
+         translated.put("hund","dog");
+    }
+    private void reverse(String string){
+        
+    }
+
+    /*private void requestReader(){
+        Scanner myObj = new Scanner(System.in);
+        String besked = myObj.nextLine();
+        if(besked.matches("UPPER#")){
+            String newMessage = besked.replace("UPPER#", "");
+            newMessage.toUpperCase();
+        } if (besked.matches("LOWER#")){
+            String newMessage = besked.replace("LOWER#", "");
+            newMessage.toLowerCase();
+        }
+
+    }*/
 
     private void litHandler() {
         List<String> questions = new ArrayList<>();
